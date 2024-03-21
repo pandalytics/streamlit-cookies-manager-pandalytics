@@ -11,7 +11,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from streamlit_cookies_manager import CookieManager
 
 
-@st.cache
+@st.cache_data
 def key_from_parameters(salt: bytes, iterations: int, password: str):
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
@@ -24,13 +24,15 @@ def key_from_parameters(salt: bytes, iterations: int, password: str):
 
 
 class EncryptedCookieManager(MutableMapping[str, str]):
+
     def __init__(
-            self, *,
-            password: str,
-            path: str = None,
-            prefix: str = "",
-            key_params_cookie="EncryptedCookieManager.key_params",
-            ignore_broken=True,
+        self,
+        *,
+        password: str,
+        path: str = None,
+        prefix: str = "",
+        key_params_cookie="EncryptedCookieManager.key_params",
+        ignore_broken=True,
     ):
         self._cookie_manager = CookieManager(path=path, prefix=prefix)
         self._fernet: Optional[Fernet] = None
@@ -59,11 +61,7 @@ class EncryptedCookieManager(MutableMapping[str, str]):
         if not key_params:
             key_params = self._initialize_new_key_params()
         salt, iterations, magic = key_params
-        key = key_from_parameters(
-            salt=salt,
-            iterations=iterations,
-            password=self._password
-        )
+        key = key_from_parameters(salt=salt, iterations=iterations, password=self._password)
 
         self._fernet = Fernet(key)
 
@@ -82,11 +80,9 @@ class EncryptedCookieManager(MutableMapping[str, str]):
         salt = os.urandom(16)
         iterations = 390000
         magic = os.urandom(16)
-        self._cookie_manager[self._key_params_cookie] = b':'.join([
-            base64.b64encode(salt),
-            str(iterations).encode('ascii'),
-            base64.b64encode(magic)
-        ]).decode('ascii')
+        self._cookie_manager[self._key_params_cookie] = b':'.join(
+            [base64.b64encode(salt), str(iterations).encode('ascii'),
+             base64.b64encode(magic)]).decode('ascii')
         return salt, iterations, magic
 
     def __repr__(self):
