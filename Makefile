@@ -6,8 +6,8 @@ js_npm_install_marker = streamlit_cookies_manager/node_modules/.package-lock.jso
 
 build: streamlit_cookies_manager/build/index.html sdist wheels
 
-sdist: dist/streamlit-cookies-manager-$(version).tar.gz
-wheels: dist/streamlit_cookies_manager-$(version)-py3-none-any.whl
+sdist: dist/streamlit-cookies-manager-pandalytics-$(version).tar.gz
+wheels: dist/streamlit_cookies_manager-pandalytics-$(version)-py3-none-any.whl
 
 js: streamlit_cookies_manager/build/index.html
 
