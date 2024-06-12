@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "streamlit-cookies-manager-pandalytics"
-version = "0.2.1"
+version = "0.2.2"
 description = "Access and save cookies from Streamlit"
 authors = ["Tomasz Kontusz <tomasz.kontusz@gmail.com>"]
 license = "Apache-2.0"
@@ -8,7 +8,7 @@ license = "Apache-2.0"
 readme = "README.md"
 
 include = [
-    "streamlit_cookies_manager/build/**/*",
+    "streamlit_cookies_manager_pandalytics/build/**/*",
 ]
 
 [tool.poetry.dependencies]
