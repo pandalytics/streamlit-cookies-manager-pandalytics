@@ -12,8 +12,8 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.12"
-streamlit = ">=0.84"
+python = ">=3.12, <4"
+streamlit = "^1.33"
 cryptography = "*"
 
 [tool.poetry.dev-dependencies]
