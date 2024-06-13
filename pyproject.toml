@@ -12,7 +12,7 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.12, <4"
+python = ">=3.11, <4"
 streamlit = "^1.33"
 cryptography = "*"
 
